@@ -8,7 +8,8 @@
         "grunt": "0.4.2",
         "grunt-contrib-jshint": "0.8.0",
         "grunt-jasmine-node": "0.1.0",
-        "grunt-jsbeautifier": "0.2.6"
+        "grunt-jsbeautifier": "0.2.6",
+        "request": "2.33.0"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
