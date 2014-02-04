@@ -8,6 +8,13 @@
 ### Add a note
 
     $ ./add.js "This is my note"
+    Status 200
+    Headers {"x-powered-by":"Express","content-type":"application/json","content-length":"43","date":"Tue, 04 Feb 2014 22:39:40 GMT","connection":"keep-alive"}
+    Response received {
+      "id": 5,
+      "title": "This is my note"
+    }
+
 
 ### List the notes
 
