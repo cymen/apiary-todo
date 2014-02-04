@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-var request = require("request");
+var request = require("request"),
+    config = require('./config.json');
 
 request({
-  url: "http://todo9.apiary.io/notes",
+  url: "http://" + config.host + "/notes",
   method: "GET"
 }, function (error, response, body) {
   var allNotes = JSON.parse(body);

@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-var request = require("request")
+var request = require("request"),
+    config = require('./config.json'),
     note = "Buy cheese and bread for breakfast.";
 
 request({
-  url: "http://todo9.apiary.io/notes",
+  url: "http://" + config.host + "/notes",
   body: JSON.stringify({title: note}),
   headers: {"Content-Type": "application/json"},
   method: "POST"
