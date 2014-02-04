@@ -2,7 +2,7 @@
 
 var request = require("request"),
     config = require('./config.json'),
-    note = "Buy cheese and bread for breakfast.";
+    note = process.argv[2] || "Buy cheese and bread for breakfast.";
 
 request({
   url: "http://" + config.host + "/notes",
