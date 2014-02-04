@@ -13,6 +13,7 @@ var addTodo = function(title) {
   nextId += 1;
   newTodo = {id: nextId, title: title};
   todos.push(newTodo);
+  console.log('Adding', newTodo);
   return newTodo;
 };
 var getTodo = function(id) {
@@ -27,8 +28,9 @@ var removeTodo = function(id) {
   return todos.filter(function(todo) {
       if (todo.id != id) {
         return todo;
-      } else {
-        console.log('deleting', todo);
+      }
+      else {
+        console.log('Deleting', todo);
       }
   });
 };
