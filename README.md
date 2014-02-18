@@ -14,6 +14,8 @@ It is possible to see the generated documentation locally by installing the apia
 
 The real value is having the bluerpint and then implementing the API using the blueprint. I got this blueprint as a sample. I was confused in a few places: the mock server is hard coded to return say the same Todo when asking for one (no matter the ID). All fine and good. But when actually implementing this and running dredd to test the implementation, it was unclear if one was expected to have to tweak the IDs being passed in with the requests so that it would be a valid use case. As in, let's create a document and then delete that document (and not try to get or delete a document that doesn't exist). There was no id parameter on the DELETE of a Todo and it seemed to inherit it from the prior example. So I added one and tweaked it as needed.
 
+**Update**: This example now includes running [literate-jasmine](https://github.com/cymen/literate-jasmine) on `api.md` to test the parts of the API that are harder to test.
+
 # Running
 
 ## Start node server
