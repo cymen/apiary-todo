@@ -34,9 +34,14 @@ var removeTodo = function(id) {
       }
   });
 };
+var hasTodo = function(id) {
+  var todoExists = !!getTodo(id);
+  console.log('Has todo for', id, todoExists);
+  return !!getTodo(id);
+};
 
 addTodo("Jogging in park");
-addTodo("Pick-up posters from post-office");
+addTodo("__Pick-up posters from post-office");
 
 var app = express();
 app.use(express.bodyParser());
@@ -61,18 +66,25 @@ app.get('/notes/:id', function(req, res) {
 
     todo = getTodo(id);
 
-    res
-      .set('x-my-header', 'the value')
-      .type('json')
-      .send(todo);
+    if (todo) {
+      res
+        .set('x-my-header', 'the value')
+        .type('json')
+        .send(todo);
+    } else {
+      res.send('Todo not found', 404);
+    }
 });
 
 app.delete('/notes/:id', function(req, res) {
     var id = req.params.id;
 
-    todos = removeTodo(id);
-
-    res.send();
+    if (hasTodo(id)) {
+      todos = removeTodo(id);
+      res.send();
+    } else {
+      res.send('Todo not found', 404);
+    }
 });
 
 app.listen(3000);
