@@ -43,7 +43,6 @@
 
 ### todo can be deleted
 
-    console.log('deleting');
     request({
       url: baseUrl + "/notes/" + todo.id,
       headers: {"Content-Type": "application/json"},
@@ -55,7 +54,6 @@
 And we can ask for the todo we just deleted to verify it is in fact
 deleted:
 
-      console.log('asking for todo with id: ' + todo.id);
       request({
         url: baseUrl + "/notes/" + todo.id,
         headers: {"Content-Type": "application/json"},
@@ -70,7 +68,6 @@ deleted:
 
 ### DELETE for todo that does not exist is 404
 
-    console.log('deleting');
     request({
       url: baseUrl + "/notes/" + todo.id,
       headers: {"Content-Type": "application/json"},
