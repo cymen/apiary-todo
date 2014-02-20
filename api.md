@@ -1,21 +1,19 @@
 # todo server
 
-    var request,
+    var client,
+        request,
         baseUrl,
         todo;
 
 ## transaction
 
-    request = require('request');
-    baseUrl = 'http://localhost:3000';
+    request = require('request-json');
+    baseUrl = 'http://localhost:3000/';
+    client = request.newClient(baseUrl);
 
 ### can connect to server
 
-    request({
-        url: baseUrl + "/notes/1",
-        headers: {"Content-Type": "application/json"},
-        method: "GET"
-    }, function (error, response, body) {
+    client.get('notes/1', function (error, response, body) {
         if (error) {
           console.log('ERROR: Could not connect to server!');
         }
@@ -27,28 +25,22 @@
 
 ### create a todo
 
-    request({
-        url: baseUrl + "/notes",
-        body: JSON.stringify({title: "This is my title"}),
-        headers: {"Content-Type": "application/json"},
-        method: "POST"
-    }, function (error, response, body) {
-        todo = JSON.parse(body);
+    var data = {
+      title: "This is my title"
+    };
+
+    client.post('notes/', data, function (error, response, fetchedTodo) {
+        todo = fetchedTodo;
 
         expect(todo.id).toBeDefined();
-        expect(todo.title).toBe('This is my title');
+        expect(todo.title).toBe(data.title);
 
         done();
     });
 
 ### todo should match
 
-    request({
-        url: baseUrl + "/notes/" + todo.id,
-        headers: {"Content-Type": "application/json"},
-        method: "GET"
-    }, function (error, response, body) {
-        var fetchedTodo = JSON.parse(body);
+    client.get('notes/' + todo.id, function (error, response, fetchedTodo) {
 
         expect(response.statusCode).toBe(200);
         expect(fetchedTodo.id).toEqual(todo.id);
@@ -59,22 +51,14 @@
 
 ### todo can be deleted
 
-    request({
-        url: baseUrl + "/notes/" + todo.id,
-        headers: {"Content-Type": "application/json"},
-        method: "DELETE"
-    }, function (error, response, body) {
+    client.del('notes/' + todo.id, function (error, response) {
 
         expect(response.statusCode).toBe(200);
 
 And we can ask for the todo we just deleted to verify it is in fact
 deleted:
 
-        request({
-            url: baseUrl + "/notes/" + todo.id,
-            headers: {"Content-Type": "application/json"},
-            method: "GET"
-        }, function (error, response, body) {
+        client.get('notes/' + todo.id, function (error, response) {
 
             expect(response.statusCode).toBe(404);
 
@@ -84,11 +68,7 @@ deleted:
 
 ### DELETE for todo that does not exist is 404
 
-    request({
-        url: baseUrl + "/notes/" + todo.id,
-        headers: {"Content-Type": "application/json"},
-        method: "DELETE"
-    }, function (error, response, body) {
+    client.del('notes/' + todo.id, function (error, response) {
 
         expect(response.statusCode).toBe(404);
 

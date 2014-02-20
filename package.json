@@ -10,7 +10,7 @@
         "grunt-jasmine-node": "0.1.0",
         "grunt-jsbeautifier": "0.2.6",
         "express": "3.4.8",
-        "request": "2.33.0",
+        "request-json": "0.4.6",
         "underscore": "1.5.2"
     },
     "scripts": {
