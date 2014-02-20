@@ -20,7 +20,7 @@
           console.log('ERROR: Could not connect to server!');
         }
 
-        expect(error).toBeUndefined();
+        expect(error).toBe(null);
 
         done();
     });
